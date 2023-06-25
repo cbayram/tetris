@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Language" content="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tetris</title>
+    <style>
+      canvas {
+        border: 5px solid gray;
+        border-top-width: 0px;
+        margin-top: 10px;
+      }
+      form > input[type="submit"] {
+        cursor: pointer;
+      }
+    </style>
+    <script type="module" src="./index.js" defer></script>
+  </head>
+  <body>
+    <form onsubmit="parseMovesAndRenderGame(event)">
+      <input
+        id="moves-input"
+        name="moves"
+        list="moves-list"
+        type="text"
+        placeholder="Enter moves to play..."
+        autofocus
+        autocomplete="off"
+        size="100"
+      />
+      <datalist id="moves-list">
+        <option value="Q0"></option>
+        <option value="Q0,Q1"></option>
+        <option value="Q0,Q2,Q4,Q6,Q8"></option>
+        <option value="Q0,Q2,Q4,Q6,Q8,Q1"></option>
+        <option value="Q0,Q2,Q4,Q6,Q8,Q1,Q1"></option>
+        <option value="I0,I4,Q8"></option>
+        <option value="I0,I4,Q8,I0,I4"></option>
+        <option value="L0,J2,L4,J6,Q8"></option>
+        <option value="L0,Z1,Z3,Z5,Z7"></option>
+        <option value="T0,T3"></option>
+        <option value="T0,T3,I6,I6"></option>
+        <option value="I0,I6,S4"></option>
+        <option value="T1,Z3,I4"></option>
+        <option value="L0,J3,L5,J8,T1"></option>
+        <option value="L0,J3,L5,J8,T1,T6"></option>
+        <option value="L0,J3,L5,J8,T1,T6,J2,L6,T0,T7"></option>
+        <option value="L0,J3,L5,J8,T1,T6,J2,L6,T0,T7,Q4"></option>
+        <option value="S0,S2,S4,S6"></option>
+        <option value="S0,S2,S4,S5,Q8,Q8,Q8,Q8,T1,Q1,I0,Q4"></option>
+        <option value="L0,J3,L5,J8,T1,T6,S2,Z5,T0,T7"></option>
+        <option value="Q0,I2,I6,I0,I6,I6,Q2,Q4"></option>
+      </datalist>
+      <input type="submit" value="Play moves" />
+    </form>
+    <canvas id="canvas" width="300" height="600"></canvas>
+  </body>
+</html>

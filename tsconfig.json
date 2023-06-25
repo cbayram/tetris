@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "typeRoots": ["./node_modules/@types", "./src/**/*.d.ts"],
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "declaration": true,
+    "strict": true,
+    "noImplicitAny": true /* Raise error on expressions and declarations with an implied 'any' type. */,
+    "strictNullChecks": true /* Enable strict null checks. */,
+    "strictFunctionTypes": true /* Enable strict checking of function types. */,
+    "noFallthroughCasesInSwitch": true /* Report errors for fallthrough cases in switch statement. */,
+    "importHelpers": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "types": ["node", "jest"],
+    "lib": ["ES6", "DOM"]
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"],
+  "ts-node": {
+    "files": true,
+    "compilerOptions": {
+      "noImplicitAny": false /* Raise error on expressions and declarations with an implied 'any' type. */,
+      "strictNullChecks": false /* Enable strict null checks. */,
+      "strictFunctionTypes": false /* Enable strict checking of function types. */
+    }
+  }
+}

@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Language" content="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tetris</title>
+    <style>
+      canvas {
+        border: 5px solid gray;
+        border-top-width: 0px;
+        margin-top: 10px;
+      }
+      form > input[type="submit"] {
+        cursor: pointer;
+      }
+    </style>
+    <script type="module" defer>var M=["Q","Z","S","T","I","L","J"],[u,p,f,g,v,T,b]=M,x={Q:[[u,u],[u,u]],Z:[[p,p,0],[0,p,p]],S:[[0,f,f],[f,f,0]],T:[[g,g,g],[0,g,0]],I:[[v,v,v,v]],L:[[T,0],[T,0],[T,T]],J:[[0,b],[0,b],[b,b]]};function C(i){let e=i.matchAll(new RegExp(`([${M.join("")}])(\\d+)`,"igm")),o=[];for(let t of e){let r=t[1].toUpperCase();o.push({letter:r,tetromino:x[r],column:parseInt(t[2],10)%10})}return o}var c=class{constructor(){this.board=[]}get height(){return this.board.length}playMove({tetromino:e,column:o}){for(let t=this.height;t>=-1;t--)if(!this.isPlacementValid(e,t,o)){t++,this.placeTetromino(e,t,o);break}}isPlacementValid(e,o,t){for(let r=e.length-1;r>=0;r--){let a=o+e.length-1-r;if(a>=this.height)return!0;if(a<0)return!1;for(let n=0;n<e[r].length;n++){let d=t+n;if(this.board[a][d]&&e[r][n])return!1}}return!0}placeTetromino(e,o,t){for(let r=e.length-1,a=o;r>=0;r--){let n=a+e.length-1-r,d=n===this.height;d&&this.board.push(Array.from({length:10},()=>0));for(let l=0;l<e[r].length;l++){let w=t+l,L=e[r][l];L&&(this.board[n][w]=L)}!d&&this.board[n].every(l=>l)&&(this.board.splice(n,1),a--)}}static newGame(){return new c}};var R={Q:"gold",Z:"red",S:"green",T:"purple",I:"cyan",L:"orange",J:"blue"},m=document.getElementById("canvas"),h=m.getContext("2d"),A=m.height,s=m.width/10;function I(i){let e=Math.max((i.height+2)*s,A);m.height=e,h.clearRect(0,0,m.width,m.height);for(let o=0;o<i.height;o++)for(let t=0;t<10;t++){let r=i.board[o][t];r&&(h.fillStyle=R[r],h.fillRect(t*s,e-(o+1)*s,s-1,s-1))}h.fillStyle="black",h.font=`${s}px Verdana`,h.fillText(`Height: ${i.height}`,0,s)}function S(i){i.preventDefault();let e=document.getElementById("moves-input").value,o=c.newGame();C(e).forEach(t=>o.playMove(t)),I(o)}window.parseMovesAndRenderGame=S;export{S as parseMovesAndRenderGame};
+</script>
+  </head>
+  <body>
+    <form onsubmit="parseMovesAndRenderGame(event)">
+      <input
+        id="moves-input"
+        name="moves"
+        list="moves-list"
+        type="text"
+        placeholder="Enter moves to play..."
+        autofocus
+        autocomplete="off"
+        size="100"
+      />
+      <datalist id="moves-list">
+        <option value="Q0"></option>
+        <option value="Q0,Q1"></option>
+        <option value="Q0,Q2,Q4,Q6,Q8"></option>
+        <option value="Q0,Q2,Q4,Q6,Q8,Q1"></option>
+        <option value="Q0,Q2,Q4,Q6,Q8,Q1,Q1"></option>
+        <option value="I0,I4,Q8"></option>
+        <option value="I0,I4,Q8,I0,I4"></option>
+        <option value="L0,J2,L4,J6,Q8"></option>
+        <option value="L0,Z1,Z3,Z5,Z7"></option>
+        <option value="T0,T3"></option>
+        <option value="T0,T3,I6,I6"></option>
+        <option value="I0,I6,S4"></option>
+        <option value="T1,Z3,I4"></option>
+        <option value="L0,J3,L5,J8,T1"></option>
+        <option value="L0,J3,L5,J8,T1,T6"></option>
+        <option value="L0,J3,L5,J8,T1,T6,J2,L6,T0,T7"></option>
+        <option value="L0,J3,L5,J8,T1,T6,J2,L6,T0,T7,Q4"></option>
+        <option value="S0,S2,S4,S6"></option>
+        <option value="S0,S2,S4,S5,Q8,Q8,Q8,Q8,T1,Q1,I0,Q4"></option>
+        <option value="L0,J3,L5,J8,T1,T6,S2,Z5,T0,T7"></option>
+        <option value="Q0,I2,I6,I0,I6,I6,Q2,Q4"></option>
+      </datalist>
+      <input type="submit" value="Play moves" />
+    </form>
+    <canvas id="canvas" width="300" height="600"></canvas>
+  </body>
+</html>
